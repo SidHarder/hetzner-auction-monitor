@@ -20,9 +20,7 @@ matches = []
 
 for server in data.get("server", []):
     try:        
-        for server in data.get("server", []):
-            print(server)
-
+        for server in data.get("server", []):            
             storage = (
                 server
                 .get("Hardware", {})
@@ -30,10 +28,16 @@ for server in data.get("server", []):
                 .get("Details", {})
             )
 
-            nvme_total = sum(storage.get("nvme", []))            
-            print('The NVME Total is: ' + str(nvme_total))                        
-
-            if nvme_total >= 1000:
+            nvme_total = sum(storage.get("nvme", []))                        
+            MAX_PRICE = 200
+            
+            price = (
+                server.get("Prices", {})
+                .get("monthly", {})
+                .get("USD", 9999)
+            )
+            
+            if nvme_total >= 3000 and price <= MAX_PRICE:
                 matches.append(server)
 
     except Exception:
