@@ -29,7 +29,7 @@ for server in data.get("server", []):
             )
 
             nvme_total = sum(storage.get("nvme", []))                        
-            MAX_PRICE = 200
+            MAX_PRICE = 400
             
             price = (
                 server.get("Prices", {})
@@ -37,7 +37,7 @@ for server in data.get("server", []):
                 .get("USD")
             )
             
-            if nvme_total >= 3000 and price <= MAX_PRICE:
+            if nvme_total >= 2000 and price <= MAX_PRICE:
                 server_id = server.get("Id")    
                 link = f"https://www.hetzner.com/sb/?freetext={server_id}#search={server_id}"
                 matches.append()
