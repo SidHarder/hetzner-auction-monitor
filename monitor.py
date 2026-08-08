@@ -34,13 +34,13 @@ for server in data.get("server", []):
             price = (
                 server.get("Prices", {})
                 .get("monthly", {})
-                .get("USD", 9999)
+                .get("USD")
             )
             
             if nvme_total >= 3000 and price <= MAX_PRICE:
-                information = (server.get("Details", {})
-                                    .get("Information", {}))
-                matches.append(information)
+                server_id = server.get("Id")    
+                link = f"https://www.hetzner.com/sb/?freetext={server_id}#search={server_id}"
+                matches.append()
 
     except Exception:
         continue
