@@ -28,7 +28,9 @@ for server in data.get("server", []):
                 .get("Details", {})
             )
 
-            nvme_total = sum(storage.get("nvme", []))                        
+            nvme_total = sum(storage.get("nvme", []))  
+            print(f"NVMe Total: {nvme_total}")
+
             MAX_PRICE = 400
             
             price = (
@@ -40,7 +42,7 @@ for server in data.get("server", []):
             if nvme_total >= 2000 and price <= MAX_PRICE:
                 server_id = server.get("Id")    
                 link = f"https://www.hetzner.com/sb/?freetext={server_id}#search={server_id}"
-                matches.append()
+                matches.append(link)
 
     except Exception:
         continue
