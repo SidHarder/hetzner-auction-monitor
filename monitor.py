@@ -49,7 +49,12 @@ if not matches:
     print("No matches found")
     raise SystemExit(0)
 
-message_body = "\n".join(matches)
+message_body = "\n".join(
+    item
+    for info_list in matches
+    for item in info_list
+)
+
 
 msg = EmailMessage()
 msg["Subject"] = "Hetzner Auction Match"
