@@ -16,14 +16,13 @@ data = response.json()
 
 print("******************* running alert check ******************* ")
 
-print(data);
-
 matches = []
 
 for server in data.get("server", []):
     try:        
         for server in data:
-
+            print(server)
+            
             storage = (
                 server
                 .get("Hardware", {})
