@@ -38,7 +38,9 @@ for server in data.get("server", []):
             )
             
             if nvme_total >= 3000 and price <= MAX_PRICE:
-                matches.append(server)
+                information = (server.get("Details", {})
+                                    .get("Information", {}))
+                matches.append(information)
 
     except Exception:
         continue
@@ -47,7 +49,7 @@ if not matches:
     print("No matches found")
     raise SystemExit(0)
 
-message_body = "Hetzner Server Found"
+message_body = "\n".join(matches)
 
 msg = EmailMessage()
 msg["Subject"] = "Hetzner Auction Match"
