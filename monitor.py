@@ -29,12 +29,10 @@ for server in data.get("server", []):
                 .get("Details", {})
             )
 
-            nvme_total = sum(storage.get("nvme", []))
-            ssd_total = sum(storage.get("sata", []))
-
+            nvme_total = sum(storage.get("nvme", []))            
             print('The NVME Total is: ' + str(nvme_total))                        
 
-            if nvme_total + ssd_total >= 3000:
+            if nvme_total >= 1000:
                 matches.append(server)
 
     except Exception:
