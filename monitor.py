@@ -16,6 +16,8 @@ data = response.json()
 
 print("******************* running alert check ******************* ")
 
+print(data);
+
 matches = []
 
 for server in data.get("server", []):
