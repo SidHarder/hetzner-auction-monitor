@@ -20,9 +20,9 @@ matches = []
 
 for server in data.get("server", []):
     try:        
-        for server in data:
+        for server in data.get("server", []):
             print(server)
-            
+
             storage = (
                 server
                 .get("Hardware", {})
