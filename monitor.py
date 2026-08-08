@@ -7,12 +7,14 @@ from email.message import EmailMessage
 URL = "https://www.hetzner.com/_resources/app/data/app/live_data_sb.json"
 
 # Example criteria
-MAX_PRICE = 90.00
+MAX_PRICE = 120.00
 
 response = requests.get(URL, timeout=30)
 response.raise_for_status()
 
 data = response.json()
+
+print("******************* running alert check ******************* ")
 
 matches = []
 
