@@ -19,8 +19,8 @@ print("******************* running alert check ******************* ")
 matches = []
 
 for server in data.get("server", []):
-    try:
-        price = float(server.get("price", 9999))
+    try:        
+        price = server.get("Prices", {}).get("monthly", {}).get("EUR", 9999)
 
         if price <= MAX_PRICE:
             matches.append(server)
