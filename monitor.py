@@ -7,7 +7,7 @@ from email.message import EmailMessage
 URL = "https://www.hetzner.com/_resources/app/data/app/live_data_sb.json"
 
 # Example criteria
-MAX_PRICE = 120.00
+MAX_PRICE = 100.00
 
 response = requests.get(URL, timeout=30)
 response.raise_for_status()
@@ -20,10 +20,20 @@ matches = []
 
 for server in data.get("server", []):
     try:        
-        price = server.get("Prices", {}).get("monthly", {}).get("EUR", 9999)
+        for server in data:
 
-        if price <= MAX_PRICE:
-            matches.append(server)
+            storage = (
+                server
+                .get("Hardware", {})
+                .get("Storage", {})
+                .get("Details", {})
+            )
+
+            nvme_total = sum(storage.get("nvme", []))
+            ssd_total = sum(storage.get("sata", []))
+
+            if nvme_total + ssd_total >= 3000:
+                matches.append(server)
 
     except Exception:
         continue
@@ -32,16 +42,7 @@ if not matches:
     print("No matches found")
     raise SystemExit(0)
 
-message_lines = []
-
-for server in matches[:10]:
-    message_lines.append(
-        f"Price: €{server.get('price')} | "
-        f"CPU: {server.get('cpu')} | "
-        f"RAM: {server.get('ram')}"
-    )
-
-message_body = "\n".join(message_lines)
+message_body = "Hetzner Server Found"
 
 msg = EmailMessage()
 msg["Subject"] = "Hetzner Auction Match"
