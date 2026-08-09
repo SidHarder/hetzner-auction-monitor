@@ -2,7 +2,7 @@ name: Hetzner Auction Monitor
 
 on:
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: "*/45 * * * *"
 
   workflow_dispatch:
 
